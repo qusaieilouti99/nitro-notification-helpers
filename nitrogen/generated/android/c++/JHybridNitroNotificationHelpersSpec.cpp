@@ -11,8 +11,8 @@
 
 #include <functional>
 #include "JFunc_void.hpp"
-#include <optional>
 #include <string>
+#include <optional>
 #include "JFunc_void_std__string.hpp"
 
 namespace margelo::nitro::nitronotificationhelpers {
@@ -30,6 +30,11 @@ namespace margelo::nitro::nitronotificationhelpers {
   size_t JHybridNitroNotificationHelpersSpec::getExternalMemorySize() noexcept {
     static const auto method = javaClassStatic()->getMethod<jlong()>("getMemorySize");
     return method(_javaPart);
+  }
+
+  void JHybridNitroNotificationHelpersSpec::dispose() noexcept {
+    static const auto method = javaClassStatic()->getMethod<void()>("dispose");
+    method(_javaPart);
   }
 
   // Properties

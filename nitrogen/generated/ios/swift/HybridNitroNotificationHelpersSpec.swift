@@ -21,7 +21,7 @@ public protocol HybridNitroNotificationHelpersSpec_protocol: HybridObject {
 }
 
 /// See ``HybridNitroNotificationHelpersSpec``
-public class HybridNitroNotificationHelpersSpec_base {
+open class HybridNitroNotificationHelpersSpec_base {
   private weak var cxxWrapper: HybridNitroNotificationHelpersSpec_cxx? = nil
   public func getCxxWrapper() -> HybridNitroNotificationHelpersSpec_cxx {
   #if DEBUG
