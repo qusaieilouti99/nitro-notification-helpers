@@ -1,6 +1,6 @@
 {
   "name": "@qusaieilouti99/nitro-notification-helpers",
-  "version": "0.0.6",
+  "version": "0.0.7",
   "description": "nitro-notification-helpers",
   "main": "lib/index",
   "module": "lib/index",
