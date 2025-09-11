@@ -13,16 +13,8 @@
 
 namespace margelo::nitro::nitronotificationhelpers::bridge::swift {
 
-  // pragma MARK: std::function<void()>
-  Func_void create_Func_void(void* _Nonnull swiftClosureWrapper) {
-    auto swiftClosure = NitroNotificationHelpers::Func_void::fromUnsafe(swiftClosureWrapper);
-    return [swiftClosure = std::move(swiftClosure)]() mutable -> void {
-      swiftClosure.call();
-    };
-  }
-  
   // pragma MARK: std::function<void(const std::string& /* notification */)>
-  Func_void_std__string create_Func_void_std__string(void* _Nonnull swiftClosureWrapper) {
+  Func_void_std__string create_Func_void_std__string(void* _Nonnull swiftClosureWrapper) noexcept {
     auto swiftClosure = NitroNotificationHelpers::Func_void_std__string::fromUnsafe(swiftClosureWrapper);
     return [swiftClosure = std::move(swiftClosure)](const std::string& notification) mutable -> void {
       swiftClosure.call(notification);
@@ -30,11 +22,11 @@ namespace margelo::nitro::nitronotificationhelpers::bridge::swift {
   }
   
   // pragma MARK: std::shared_ptr<HybridNitroNotificationHelpersSpec>
-  std::shared_ptr<HybridNitroNotificationHelpersSpec> create_std__shared_ptr_HybridNitroNotificationHelpersSpec_(void* _Nonnull swiftUnsafePointer) {
+  std::shared_ptr<HybridNitroNotificationHelpersSpec> create_std__shared_ptr_HybridNitroNotificationHelpersSpec_(void* _Nonnull swiftUnsafePointer) noexcept {
     NitroNotificationHelpers::HybridNitroNotificationHelpersSpec_cxx swiftPart = NitroNotificationHelpers::HybridNitroNotificationHelpersSpec_cxx::fromUnsafe(swiftUnsafePointer);
     return std::make_shared<margelo::nitro::nitronotificationhelpers::HybridNitroNotificationHelpersSpecSwift>(swiftPart);
   }
-  void* _Nonnull get_std__shared_ptr_HybridNitroNotificationHelpersSpec_(std__shared_ptr_HybridNitroNotificationHelpersSpec_ cppType) {
+  void* _Nonnull get_std__shared_ptr_HybridNitroNotificationHelpersSpec_(std__shared_ptr_HybridNitroNotificationHelpersSpec_ cppType) noexcept {
     std::shared_ptr<margelo::nitro::nitronotificationhelpers::HybridNitroNotificationHelpersSpecSwift> swiftWrapper = std::dynamic_pointer_cast<margelo::nitro::nitronotificationhelpers::HybridNitroNotificationHelpersSpecSwift>(cppType);
     #ifdef NITRO_DEBUG
     if (swiftWrapper == nullptr) [[unlikely]] {

@@ -1,52 +1,49 @@
 package com.margelo.nitro.nitronotificationhelpers
 
-import android.content.Context
-import android.content.SharedPreferences
 import android.util.Log
-import androidx.annotation.Keep
-import com.facebook.jni.HybridData
 import com.facebook.proguard.annotations.DoNotStrip
-import com.margelo.nitro.NitroModules
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.SupervisorJob
+import kotlinx.coroutines.launch
 
 @DoNotStrip
-@Keep
 class HybridNotificationHelpers : HybridNitroNotificationHelpersSpec() {
 
-    private val prefs: SharedPreferences
-        get() = NitroModules.applicationContext!!
-            .getSharedPreferences("notification_prefs", Context.MODE_PRIVATE)
+    private val mainScope = CoroutineScope(SupervisorJob() + Dispatchers.Main)
+    private val TAG = "HybridNotificationHelpers"
 
-    override fun addListener(listener: (notification: String) -> Unit): () -> Unit {
-        NotificationEventBus.setListener { notification ->
-            listener(notification)
+    // single active listener stored on the HybridObject instance
+    private var activeListener: ((String) -> Unit)? = null
+
+    override fun addListener(listener: (notification: String) -> Unit) {
+        // Wrap the JS callback in a safe Kotlin lambda to avoid exceptions escaping native boundary
+        val safeListener: (String) -> Unit = { n ->
+            try {
+                listener(n)
+            } catch (e: Exception) {
+                Log.e(TAG, "JS listener threw", e)
+            }
         }
-        // Check persistent storage for a pending notification
-        val stored = prefs.getString("initial_notification", null)
-        if (stored != null) {
-            listener(stored)
-            prefs.edit().remove("initial_notification").apply()
-        }
-        return {
-            NotificationEventBus.setListener(null)
-        }
+
+        activeListener = safeListener
+        NotificationEventBus.setListener(safeListener)
+        Log.d(TAG, "Listener added.")
+        // NotificationEventBus will dispatch any cached notifications upon setListener()
     }
 
-    override fun removeListeners(): () -> Unit {
+    override fun removeListener() {
+        Log.d(TAG, "removeListener called.")
+        activeListener = null
         NotificationEventBus.setListener(null)
-        return {}
     }
 
     override fun getInitialClickedNotification(): String? {
-        val notification = prefs.getString("initial_notification", null)
-        prefs.edit().remove("initial_notification").apply()
-        return notification
+        // Pop one cached notification if any (and remove it from the queue)
+        return NotificationEventBus.popCachedNotification()
     }
 
-    override fun storeNotification(notification: String) {
-        if (NotificationEventBus.hasListener()) {
-            NotificationEventBus.emit(notification)
-        } else {
-            prefs.edit().putString("initial_notification", notification).apply()
-        }
+    override fun cleanUpStoreNotifications() {
+        NotificationEventBus.clearCachedNotifications()
     }
 }

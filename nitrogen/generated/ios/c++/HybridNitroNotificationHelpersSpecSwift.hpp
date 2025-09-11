@@ -14,8 +14,8 @@ namespace NitroNotificationHelpers { class HybridNitroNotificationHelpersSpec_cx
 
 
 
-#include <functional>
 #include <string>
+#include <functional>
 #include <optional>
 
 #include "NitroNotificationHelpers-Swift-Cxx-Umbrella.hpp"
@@ -59,21 +59,17 @@ namespace margelo::nitro::nitronotificationhelpers {
 
   public:
     // Methods
-    inline std::function<void()> addListener(const std::function<void(const std::string& /* notification */)>& listener) override {
+    inline void addListener(const std::function<void(const std::string& /* notification */)>& listener) override {
       auto __result = _swiftPart.addListener(listener);
       if (__result.hasError()) [[unlikely]] {
         std::rethrow_exception(__result.error());
       }
-      auto __value = std::move(__result.value());
-      return __value;
     }
-    inline std::function<void()> removeListeners() override {
-      auto __result = _swiftPart.removeListeners();
+    inline void removeListener() override {
+      auto __result = _swiftPart.removeListener();
       if (__result.hasError()) [[unlikely]] {
         std::rethrow_exception(__result.error());
       }
-      auto __value = std::move(__result.value());
-      return __value;
     }
     inline std::optional<std::string> getInitialClickedNotification() override {
       auto __result = _swiftPart.getInitialClickedNotification();
@@ -83,8 +79,8 @@ namespace margelo::nitro::nitronotificationhelpers {
       auto __value = std::move(__result.value());
       return __value;
     }
-    inline void storeNotification(const std::string& notification) override {
-      auto __result = _swiftPart.storeNotification(notification);
+    inline void cleanUpStoreNotifications() override {
+      auto __result = _swiftPart.cleanUpStoreNotifications();
       if (__result.hasError()) [[unlikely]] {
         std::rethrow_exception(__result.error());
       }

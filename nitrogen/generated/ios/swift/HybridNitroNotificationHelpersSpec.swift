@@ -14,10 +14,10 @@ public protocol HybridNitroNotificationHelpersSpec_protocol: HybridObject {
   
 
   // Methods
-  func addListener(listener: @escaping (_ notification: String) -> Void) throws -> () -> Void
-  func removeListeners() throws -> () -> Void
+  func addListener(listener: @escaping (_ notification: String) -> Void) throws -> Void
+  func removeListener() throws -> Void
   func getInitialClickedNotification() throws -> String?
-  func storeNotification(notification: String) throws -> Void
+  func cleanUpStoreNotifications() throws -> Void
 }
 
 /// See ``HybridNitroNotificationHelpersSpec``

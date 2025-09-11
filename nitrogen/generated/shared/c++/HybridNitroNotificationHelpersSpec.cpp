@@ -15,9 +15,9 @@ namespace margelo::nitro::nitronotificationhelpers {
     // load custom methods/properties
     registerHybrids(this, [](Prototype& prototype) {
       prototype.registerHybridMethod("addListener", &HybridNitroNotificationHelpersSpec::addListener);
-      prototype.registerHybridMethod("removeListeners", &HybridNitroNotificationHelpersSpec::removeListeners);
+      prototype.registerHybridMethod("removeListener", &HybridNitroNotificationHelpersSpec::removeListener);
       prototype.registerHybridMethod("getInitialClickedNotification", &HybridNitroNotificationHelpersSpec::getInitialClickedNotification);
-      prototype.registerHybridMethod("storeNotification", &HybridNitroNotificationHelpersSpec::storeNotification);
+      prototype.registerHybridMethod("cleanUpStoreNotifications", &HybridNitroNotificationHelpersSpec::cleanUpStoreNotifications);
     });
   }
 

@@ -53,10 +53,10 @@ namespace margelo::nitro::nitronotificationhelpers {
 
   public:
     // Methods
-    std::function<void()> addListener(const std::function<void(const std::string& /* notification */)>& listener) override;
-    std::function<void()> removeListeners() override;
+    void addListener(const std::function<void(const std::string& /* notification */)>& listener) override;
+    void removeListener() override;
     std::optional<std::string> getInitialClickedNotification() override;
-    void storeNotification(const std::string& notification) override;
+    void cleanUpStoreNotifications() override;
 
   private:
     friend HybridBase;

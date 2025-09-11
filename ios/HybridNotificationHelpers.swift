@@ -8,14 +8,12 @@ public class HybridNotificationHelpers: HybridNitroNotificationHelpersSpec {
 
     // MARK: - Methods
 
-    public func addListener(listener: @escaping (_ notification: String) -> Void) throws -> () -> Void {
+    public func addListener(listener: @escaping (_ notification: String) -> Void) throws -> Void {
         // No-op implementation for iOS
-        return { }
     }
 
-    public func removeListeners() throws -> () -> Void {
+    public func removeListener() throws -> Void {
         // No-op implementation for iOS
-        return { }
     }
 
     public func getInitialClickedNotification() throws -> String? {
@@ -23,7 +21,7 @@ public class HybridNotificationHelpers: HybridNitroNotificationHelpersSpec {
         return nil
     }
 
-    public func storeNotification(notification: String) throws {
+    public func cleanUpStoreNotifications() throws -> Void {
         // No-op implementation for iOS
     }
 }

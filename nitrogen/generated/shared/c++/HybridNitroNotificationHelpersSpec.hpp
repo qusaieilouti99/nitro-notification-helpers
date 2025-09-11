@@ -15,8 +15,8 @@
 
 
 
-#include <functional>
 #include <string>
+#include <functional>
 #include <optional>
 
 namespace margelo::nitro::nitronotificationhelpers {
@@ -50,10 +50,10 @@ namespace margelo::nitro::nitronotificationhelpers {
 
     public:
       // Methods
-      virtual std::function<void()> addListener(const std::function<void(const std::string& /* notification */)>& listener) = 0;
-      virtual std::function<void()> removeListeners() = 0;
+      virtual void addListener(const std::function<void(const std::string& /* notification */)>& listener) = 0;
+      virtual void removeListener() = 0;
       virtual std::optional<std::string> getInitialClickedNotification() = 0;
-      virtual void storeNotification(const std::string& notification) = 0;
+      virtual void cleanUpStoreNotifications() = 0;
 
     protected:
       // Hybrid Setup

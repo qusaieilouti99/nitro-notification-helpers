@@ -9,10 +9,9 @@
 
 
 
-#include <functional>
-#include "JFunc_void.hpp"
 #include <string>
 #include <optional>
+#include <functional>
 #include "JFunc_void_std__string.hpp"
 
 namespace margelo::nitro::nitronotificationhelpers {
@@ -41,44 +40,22 @@ namespace margelo::nitro::nitronotificationhelpers {
   
 
   // Methods
-  std::function<void()> JHybridNitroNotificationHelpersSpec::addListener(const std::function<void(const std::string& /* notification */)>& listener) {
-    static const auto method = javaClassStatic()->getMethod<jni::local_ref<JFunc_void::javaobject>(jni::alias_ref<JFunc_void_std__string::javaobject> /* listener */)>("addListener_cxx");
-    auto __result = method(_javaPart, JFunc_void_std__string_cxx::fromCpp(listener));
-    return [&]() -> std::function<void()> {
-      if (__result->isInstanceOf(JFunc_void_cxx::javaClassStatic())) [[likely]] {
-        auto downcast = jni::static_ref_cast<JFunc_void_cxx::javaobject>(__result);
-        return downcast->cthis()->getFunction();
-      } else {
-        auto __resultRef = jni::make_global(__result);
-        return [__resultRef]() -> void {
-          return __resultRef->invoke();
-        };
-      }
-    }();
+  void JHybridNitroNotificationHelpersSpec::addListener(const std::function<void(const std::string& /* notification */)>& listener) {
+    static const auto method = javaClassStatic()->getMethod<void(jni::alias_ref<JFunc_void_std__string::javaobject> /* listener */)>("addListener_cxx");
+    method(_javaPart, JFunc_void_std__string_cxx::fromCpp(listener));
   }
-  std::function<void()> JHybridNitroNotificationHelpersSpec::removeListeners() {
-    static const auto method = javaClassStatic()->getMethod<jni::local_ref<JFunc_void::javaobject>()>("removeListeners_cxx");
-    auto __result = method(_javaPart);
-    return [&]() -> std::function<void()> {
-      if (__result->isInstanceOf(JFunc_void_cxx::javaClassStatic())) [[likely]] {
-        auto downcast = jni::static_ref_cast<JFunc_void_cxx::javaobject>(__result);
-        return downcast->cthis()->getFunction();
-      } else {
-        auto __resultRef = jni::make_global(__result);
-        return [__resultRef]() -> void {
-          return __resultRef->invoke();
-        };
-      }
-    }();
+  void JHybridNitroNotificationHelpersSpec::removeListener() {
+    static const auto method = javaClassStatic()->getMethod<void()>("removeListener");
+    method(_javaPart);
   }
   std::optional<std::string> JHybridNitroNotificationHelpersSpec::getInitialClickedNotification() {
     static const auto method = javaClassStatic()->getMethod<jni::local_ref<jni::JString>()>("getInitialClickedNotification");
     auto __result = method(_javaPart);
     return __result != nullptr ? std::make_optional(__result->toStdString()) : std::nullopt;
   }
-  void JHybridNitroNotificationHelpersSpec::storeNotification(const std::string& notification) {
-    static const auto method = javaClassStatic()->getMethod<void(jni::alias_ref<jni::JString> /* notification */)>("storeNotification");
-    method(_javaPart, jni::make_jstring(notification));
+  void JHybridNitroNotificationHelpersSpec::cleanUpStoreNotifications() {
+    static const auto method = javaClassStatic()->getMethod<void()>("cleanUpStoreNotifications");
+    method(_javaPart);
   }
 
 } // namespace margelo::nitro::nitronotificationhelpers

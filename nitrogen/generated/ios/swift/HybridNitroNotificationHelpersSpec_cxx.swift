@@ -110,37 +110,29 @@ open class HybridNitroNotificationHelpersSpec_cxx {
 
   // Methods
   @inline(__always)
-  public final func addListener(listener: bridge.Func_void_std__string) -> bridge.Result_std__function_void____ {
+  public final func addListener(listener: bridge.Func_void_std__string) -> bridge.Result_void_ {
     do {
-      let __result = try self.__implementation.addListener(listener: { () -> (String) -> Void in
+      try self.__implementation.addListener(listener: { () -> (String) -> Void in
         let __wrappedFunction = bridge.wrap_Func_void_std__string(listener)
         return { (__notification: String) -> Void in
           __wrappedFunction.call(std.string(__notification))
         }
       }())
-      let __resultCpp = { () -> bridge.Func_void in
-        let __closureWrapper = Func_void(__result)
-        return bridge.create_Func_void(__closureWrapper.toUnsafe())
-      }()
-      return bridge.create_Result_std__function_void____(__resultCpp)
+      return bridge.create_Result_void_()
     } catch (let __error) {
       let __exceptionPtr = __error.toCpp()
-      return bridge.create_Result_std__function_void____(__exceptionPtr)
+      return bridge.create_Result_void_(__exceptionPtr)
     }
   }
   
   @inline(__always)
-  public final func removeListeners() -> bridge.Result_std__function_void____ {
+  public final func removeListener() -> bridge.Result_void_ {
     do {
-      let __result = try self.__implementation.removeListeners()
-      let __resultCpp = { () -> bridge.Func_void in
-        let __closureWrapper = Func_void(__result)
-        return bridge.create_Func_void(__closureWrapper.toUnsafe())
-      }()
-      return bridge.create_Result_std__function_void____(__resultCpp)
+      try self.__implementation.removeListener()
+      return bridge.create_Result_void_()
     } catch (let __error) {
       let __exceptionPtr = __error.toCpp()
-      return bridge.create_Result_std__function_void____(__exceptionPtr)
+      return bridge.create_Result_void_(__exceptionPtr)
     }
   }
   
@@ -163,9 +155,9 @@ open class HybridNitroNotificationHelpersSpec_cxx {
   }
   
   @inline(__always)
-  public final func storeNotification(notification: std.string) -> bridge.Result_void_ {
+  public final func cleanUpStoreNotifications() -> bridge.Result_void_ {
     do {
-      try self.__implementation.storeNotification(notification: String(notification))
+      try self.__implementation.cleanUpStoreNotifications()
       return bridge.create_Result_void_()
     } catch (let __error) {
       let __exceptionPtr = __error.toCpp()

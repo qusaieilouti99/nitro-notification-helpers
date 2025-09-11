@@ -40,23 +40,18 @@ abstract class HybridNitroNotificationHelpersSpec: HybridObject() {
   
 
   // Methods
-  abstract fun addListener(listener: (notification: String) -> Unit): () -> Unit
+  abstract fun addListener(listener: (notification: String) -> Unit): Unit
   
   @DoNotStrip
   @Keep
-  private fun addListener_cxx(listener: Func_void_std__string): Func_void {
+  private fun addListener_cxx(listener: Func_void_std__string): Unit {
     val __result = addListener(listener)
-    return Func_void_java(__result)
+    return __result
   }
-  
-  abstract fun removeListeners(): () -> Unit
   
   @DoNotStrip
   @Keep
-  private fun removeListeners_cxx(): Func_void {
-    val __result = removeListeners()
-    return Func_void_java(__result)
-  }
+  abstract fun removeListener(): Unit
   
   @DoNotStrip
   @Keep
@@ -64,7 +59,7 @@ abstract class HybridNitroNotificationHelpersSpec: HybridObject() {
   
   @DoNotStrip
   @Keep
-  abstract fun storeNotification(notification: String): Unit
+  abstract fun cleanUpStoreNotifications(): Unit
 
   private external fun initHybrid(): HybridData
 

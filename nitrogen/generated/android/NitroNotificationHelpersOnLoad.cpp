@@ -16,7 +16,6 @@
 #include <NitroModules/HybridObjectRegistry.hpp>
 
 #include "JHybridNitroNotificationHelpersSpec.hpp"
-#include "JFunc_void.hpp"
 #include "JFunc_void_std__string.hpp"
 #include <NitroModules/DefaultConstructableObject.hpp>
 
@@ -30,7 +29,6 @@ int initialize(JavaVM* vm) {
   return facebook::jni::initialize(vm, [] {
     // Register native JNI methods
     margelo::nitro::nitronotificationhelpers::JHybridNitroNotificationHelpersSpec::registerNatives();
-    margelo::nitro::nitronotificationhelpers::JFunc_void_cxx::registerNatives();
     margelo::nitro::nitronotificationhelpers::JFunc_void_std__string_cxx::registerNatives();
 
     // Register Nitro Hybrid Objects
@@ -39,8 +37,7 @@ int initialize(JavaVM* vm) {
       []() -> std::shared_ptr<HybridObject> {
         static DefaultConstructableObject<JHybridNitroNotificationHelpersSpec::javaobject> object("com/margelo/nitro/nitronotificationhelpers/HybridNotificationHelpers");
         auto instance = object.create();
-        auto globalRef = jni::make_global(instance);
-        return globalRef->cthis()->shared();
+        return instance->cthis()->shared();
       }
     );
   });
