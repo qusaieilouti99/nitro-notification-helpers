@@ -20,6 +20,13 @@ public protocol HybridNitroNotificationHelpersSpec_protocol: HybridObject {
   func cleanUpStoreNotifications() throws -> Void
 }
 
+public extension HybridNitroNotificationHelpersSpec_protocol {
+  /// Default implementation of ``HybridObject.toString``
+  func toString() -> String {
+    return "[HybridObject NitroNotificationHelpers]"
+  }
+}
+
 /// See ``HybridNitroNotificationHelpersSpec``
 open class HybridNitroNotificationHelpersSpec_base {
   private weak var cxxWrapper: HybridNitroNotificationHelpersSpec_cxx? = nil

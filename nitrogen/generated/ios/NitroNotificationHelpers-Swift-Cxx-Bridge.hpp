@@ -47,7 +47,7 @@ namespace margelo::nitro::nitronotificationhelpers::bridge::swift {
   private:
     std::unique_ptr<std::function<void(const std::string& /* notification */)>> _function;
   } SWIFT_NONCOPYABLE;
-  Func_void_std__string create_Func_void_std__string(void* _Nonnull swiftClosureWrapper) noexcept;
+  Func_void_std__string create_Func_void_std__string(void* NON_NULL swiftClosureWrapper) noexcept;
   inline Func_void_std__string_Wrapper wrap_Func_void_std__string(Func_void_std__string value) noexcept {
     return Func_void_std__string_Wrapper(std::move(value));
   }
@@ -72,8 +72,8 @@ namespace margelo::nitro::nitronotificationhelpers::bridge::swift {
    * Specialized version of `std::shared_ptr<HybridNitroNotificationHelpersSpec>`.
    */
   using std__shared_ptr_HybridNitroNotificationHelpersSpec_ = std::shared_ptr<HybridNitroNotificationHelpersSpec>;
-  std::shared_ptr<HybridNitroNotificationHelpersSpec> create_std__shared_ptr_HybridNitroNotificationHelpersSpec_(void* _Nonnull swiftUnsafePointer) noexcept;
-  void* _Nonnull get_std__shared_ptr_HybridNitroNotificationHelpersSpec_(std__shared_ptr_HybridNitroNotificationHelpersSpec_ cppType) noexcept;
+  std::shared_ptr<HybridNitroNotificationHelpersSpec> create_std__shared_ptr_HybridNitroNotificationHelpersSpec_(void* NON_NULL swiftUnsafePointer) noexcept;
+  void* NON_NULL get_std__shared_ptr_HybridNitroNotificationHelpersSpec_(std__shared_ptr_HybridNitroNotificationHelpersSpec_ cppType);
   
   // pragma MARK: std::weak_ptr<HybridNitroNotificationHelpersSpec>
   using std__weak_ptr_HybridNitroNotificationHelpersSpec_ = std::weak_ptr<HybridNitroNotificationHelpersSpec>;
